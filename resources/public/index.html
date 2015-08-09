@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CAT</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="cover.css">
+  </head>
+  <body>
+  <div class="site-wrapper">
+    <div class="site-wrapper-inner">
+      <div class="cover-container">
+        <div class="masthead clearfix">
+          <div class="inner">
+            <h3 class="masthead-brand">CAT</h3>
+            <nav>
+              <ul class="nav masthead-nav">
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="inner cover">
+          <h1 class="cover-heading">（ Φ ω Φ ）</h1>
+          <p class="lead" id="response">zzz</p>
+          <p class="lead">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="call" id="call" placeholder="say something...">
+                </div>
+                <div class="form-group">
+                    <button type="button" id="call" class="btn btn-default">Call</button>
+                </div>
+            </div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("button#call").click(function() {
+            var call = $(':text[name="call"]').val();
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:3000/call/" + call,
+                success: function(msg){
+                    console.log(msg);
+                    $(':text[name="call"]').val("");
+                    $("p#response").text(msg);
+                },
+                error: function(err) {
+                    console.log(err);
+                    $("p#response").text(err.responseText);
+                }
+            });
+        });
+    });
+    </script>
+  </body>
+</html>
