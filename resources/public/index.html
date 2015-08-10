@@ -43,6 +43,7 @@
     <script>
     $(document).ready(function(){
         $("button#call").click(function() {
+            $("p#response").fadeOut("slow");
             var call = $(':text[name="call"]').val();
             $.ajax({
                 type: "GET",
@@ -50,7 +51,8 @@
                 success: function(msg){
                     console.log(msg);
                     $(':text[name="call"]').val("");
-                    $("p#response").text(msg);
+                    $("p#response").hide().text(msg);
+                    $("p#response").fadeIn("slow");
                 },
                 error: function(err) {
                     console.log(err);
