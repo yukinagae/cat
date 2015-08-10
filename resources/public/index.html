@@ -38,8 +38,8 @@
     <script>
     $(document).ready(function(){
 
-        $("input#call").keyup(function(event){
-            if(event.keyCode == 13){
+        $("input#call").keyup(function(event) {
+            if(event.keyCode == 13) {
                 response();
             }
         });
@@ -50,8 +50,7 @@
             $.ajax({
                 type: "GET",
                 url: "http://localhost:3000/call/" + call,
-                success: function(msg){
-                    console.log(msg);
+                success: function(msg) {
                     $(':text[name="call"]').val("");
                     $("p#response").hide().text(msg);
                     $("p#response").fadeIn("slow");
