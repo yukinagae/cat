@@ -25,14 +25,9 @@
           <h1 class="cover-heading">（ Φ ω Φ ）</h1>
           <p class="lead" id="response">zzz</p>
           <p class="lead">
-            <form>
                 <div class="form-group">
                     <input type="text" class="form-control" name="call" id="call" placeholder="say something...">
                 </div>
-                <div class="form-group">
-                    <button type="button" id="call" class="btn btn-default">Call</button>
-                </div>
-            </form>
           </p>
         </div>
       </div>
@@ -42,7 +37,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script>
     $(document).ready(function(){
-        $("button#call").click(function() {
+
+        $("input#call").keyup(function(event){
+            if(event.keyCode == 13){
+                response();
+            }
+        });
+
+        function response() {
             $("p#response").fadeOut("slow");
             var call = $(':text[name="call"]').val();
             $.ajax({
@@ -59,7 +61,8 @@
                     $("p#response").text(err.responseText);
                 }
             });
-        });
+        }
+
     });
     </script>
   </body>
