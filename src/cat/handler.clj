@@ -9,8 +9,9 @@
 
 (defroutes app-routes
   (GET "/" [] (response/redirect "index.html"))
+  (GET "/call/request" request (str request)) ;; debug
   (GET "/call/" [] "zzz")
-  (GET "/call/google" [] (google/response))
+  (GET "/call/google" request (google/response (get (:headers request) "accept-language")))
   (GET "/call/linus" [] (linus/response))
   (GET "/call/:call" [call] (simple/response))
   (route/not-found "mew"))
