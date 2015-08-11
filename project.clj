@@ -6,6 +6,7 @@
                  [compojure "1.3.1"]
                  [ring/ring-defaults "0.1.2"]
                  [enlive "1.1.6"]
+                 [ca.pjer/chatter-bot-api "1.3.3"]
                 ]
   :plugins [[lein-ring "0.8.13"]]
   :ring {:handler cat.handler/app}
