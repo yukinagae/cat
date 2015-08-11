@@ -1,15 +1,21 @@
 (ns cat.engine.linus
   (:require [net.cgrand.enlive-html :as html]))
 
+(def linus "Linus Torvalds")
+
 ;; TODO this is buggy. should avoid "External Links"
+;; TODO should include a tag within li tag
 (defn quotes []
   (-> (java.net.URL. "https://en.wikiquote.org/wiki/Linus_Torvalds") 
     html/html-resource 
-    (html/select [:div#mw-content-text :> :ul :> :li]))) 
+    (html/select [:div#mw-content-text :> :ul :> :li])))
 
-;; TODO 0 should be random depends on quotes size
 (defn get-quote [quotes]
-  (-> (nth quotes 0) :content first))
+  (let [r (rand-int (count quotes))]
+    (-> (nth quotes r) :content first)))
+
+(defn add-author [q]
+  (str q " ― " linus))
 
 ;; "Talk is cheap. Show me the code. ― Linus Torvalds"
-(defn response [] (-> (quotes) get-quote))
+(defn response [] (-> (quotes) get-quote add-author))
